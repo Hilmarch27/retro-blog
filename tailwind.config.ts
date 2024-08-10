@@ -18,6 +18,26 @@ const config = {
       },
     },
     extend: {
+      boxShadow: {
+        'retro-sm': '3px 3px 0px 0px rgba(0, 0, 0)',  // Small shadow
+        'retro-md': '5px 5px 0px 0px rgba(0, 0, 0)',  // Medium shadow (default)
+        'retro-lg': '8px 8px 0px 0px rgba(0, 0, 0)',  // Large shadow
+        'retro': '5px 5px 0px 0px rgba(0, 0, 0)',     // Default shadow (alias for retro-md)
+      },
+      colors: {
+        primary: {
+          DEFAULT: '#FFC72C',  // Warna saat light mode
+          dark: '#2563EB',   // Warna saat dark mode
+        },
+        secondary: {
+          light: '#9333EA',
+          dark: '#7C3AED',
+        },
+        text: {
+          light: '#111827',
+          dark: '#F9FAFB',
+        },
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -36,5 +56,7 @@ const config = {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config
+
+
 
 export default config

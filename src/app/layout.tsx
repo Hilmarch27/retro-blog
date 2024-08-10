@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import SectionContainer from "@/components/layouts/SectionContainer";
+import MainNavbar from "@/components/layouts/Navbar";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
@@ -16,7 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <main className="bg-[#fbf5e9] min-h-screen scroll-smooth">
+          <SectionContainer>
+            <MainNavbar />
+            {children}
+          </SectionContainer>
+        </main>
+      </body>
     </html>
   );
 }
