@@ -4,7 +4,7 @@ import { Input } from "../ui/input"
 import { ButtonRetro } from "../custom/ButtonRetro"
 export default function MainNavbar() {
     return (
-        <header className="sticky top-0 z-40 w-full border-b bg-background">
+        <header className="sticky top-0 z-40 w-full border-b bg-[#fbf5e9]">
             <div className="container flex h-16 items-center justify-between px-4 md:px-6">
                 <div className="flex">
                     <Link href="#" className="mr-6 flex items-center" prefetch={false}>
