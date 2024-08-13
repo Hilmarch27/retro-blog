@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -26,13 +20,42 @@ model User {
   @@map(name: "users")
 }
 
-model Post {
-  id        String  @id @default(uuid())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  posts     Post[]   @relation("PostCategories", references: [id], fields: [id])
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  @@map("post")
+  @@map(name: "categories")
+}
+
+model Post {
+  id        String     @id @default(uuid())
+  title     String
+  slug      String
+  content   String?
+  published Boolean    @default(false)
+  authorId  String
+  author    User       @relation(fields: [authorId], references: [id])
+  categories Category[] @relation("PostCategories", references: [id], fields: [id])
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map("posts")
+}
+
+// Join table for many-to-many relationship between Post and Category
+model _PostToCategory {
+  postId     String
+  categoryId String
+
+  post     Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@id([postId, categoryId])
+  @@map("_PostToCategory")
 }
